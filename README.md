@@ -1,4 +1,4 @@
-## CureCoin Wallet 
+## TESTNET ONLY REPO
 
 ### Overview 
 
