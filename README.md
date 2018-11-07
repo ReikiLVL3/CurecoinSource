@@ -23,7 +23,7 @@ There are two CureCoin Linux based clients that you can compile for yourself: on
     > 3. **make -f makefile.unix**
     > 4. **sudo make install** Alternatively, don't run that command and just place the binary wherever you want.
 
-    On new versions of linux such a Ubuntu 18.04 or Debain 9 + "sudo apt-get install libssl1.0-dev". Use libdb4.8 or libdb5.1 on older linux versions (IE 14.04). Ubuntu 16.04 use need libdb5.3++-dev. 
+    On new versions of linux such a Ubuntu 18.04 or Debain 9 + "sudo apt-get install libssl1.0-dev". Use libdb4.8 or libdb5.1 on older linux versions (IE 14.04). Ubuntu 16.04 use libdb5.3++-dev. 
 
 ### Reporting bugs or getting assistance
 
