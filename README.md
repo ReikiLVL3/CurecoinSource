@@ -7,7 +7,8 @@ There are two CureCoin Linux based clients that you can compile for yourself: on
 * **Install from source**
 
   This involves downloading the source, meeting the dependencies, compiling the code, and then installing the resulting software. 
-
+    
+   sudo apt install git 
    git clone https://github.com/ReikiLVL3/CurecoinSource.git
 
     FOR THE GUI CLIENT:
@@ -23,8 +24,10 @@ There are two CureCoin Linux based clients that you can compile for yourself: on
     > 3. **make -f makefile.unix**
     > 4. **sudo make install** Alternatively, don't run that command and just place the binary wherever you want.
 
-    On new versions of linux such a Ubuntu 18.04 or Debain 9 + "sudo apt-get install libssl1.0-dev". Use libdb4.8 or libdb5.1 on older linux versions (IE 14.04). Ubuntu 16.04 use libdb5.3++-dev. 
+    
+    !!!On new versions of linux such a Ubuntu 18.04 or Debain 9 + "sudo apt-get install libssl1.0-dev". Use libdb4.8 or libdb5.1 on older linux versions (IE 14.04). Ubuntu 16.04 use libdb5.3++-dev!!!  
+      Please submit to git if you have compatability issues, we are attempting to create a cheat sheet for which libssl for which distro.
 
 ### Reporting bugs or getting assistance
 
-General help for CureCoin can be found on the forums at https://www.curecoin.net/forum or on Discord https://discord.gg/jtztkFZ . The forum is recommended for non frequent users of irc. 
+General help for CureCoin can be found on the forums at https://www.curecoin.net/forum or on Discord https://discord.gg/jtztkFZ  
