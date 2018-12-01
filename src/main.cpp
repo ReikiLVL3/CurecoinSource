@@ -43,7 +43,7 @@ static CBigNum bnProofOfStakeHardLimit(~uint256(0) >> 30);
 static CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 static CBigNum bnProofOfStakeLimitTestNet(~uint256(0) >> 20);
 
-unsigned int nStakeMinAge = 60 * 60 * 24 * 1; // minimum age for coin age // lowered for public testnet
+unsigned int nStakeMinAge = 60 * 60 * 1; // minimum age for coin age // 1 hour - lowered for public testnet
 unsigned int nStakeMaxAge = 60 * 60 * 24 * 10; // stake age of full weight // lower for public testnet
 unsigned int nStakeTargetSpacing = 1 * 600; // 600 seconds block spacing
 const int64 nChainStartTime = 1398151422;
@@ -1079,7 +1079,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nBits, unsigned int nTi
 }
 
 static const int64 nTargetTimespan = 4 * 60 * 60;  // 4-hour
-void loop() { if (nBestHeight > (int)HF_BLOCK) nStakeTargetSpacing = 4 * 60; /* 4 minute target enforced */ }
+void loop() { if (nBestHeight > (int)HF_BLOCK) nStakeTargetSpacing = 1 * 60; /* 4 minute target enforced */ }
 static const int64 nTargetSpacingWorkMax = 12 * nStakeTargetSpacing; // 2-hour // 48 min if 'if' above true
 
 //
@@ -1168,7 +1168,7 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
     // ppcoin: retarget with exponential moving toward target spacing
     CBigNum bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
-    if (pindexLast->nHeight > (int)HF_BLOCK) nStakeTargetSpacing = 4 * 60; // 4 minute target enforced
+    if (pindexLast->nHeight > (int)HF_BLOCK) nStakeTargetSpacing = 1 * 60; // 4 minute target enforced
     int64 nTargetSpacing = fProofOfStake? nStakeTargetSpacing : min(nTargetSpacingWorkMax, (int64) nStakeTargetSpacing * (1 + pindexLast->nHeight - pindexPrev->nHeight));
     int64 nInterval = nTargetTimespan / nTargetSpacing;
     bnNew *= ((nInterval - 1) * nTargetSpacing + nActualSpacing + nActualSpacing);
@@ -1999,7 +1999,7 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64& nCoinAge) const
         CBlock block;
         if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
             return false; // unable to read block of previous transaction
-        if ( nBestHeight > (int)HF_BLOCK ) nStakeMinAge = 60 * 60 * 24 * 4; // 4 day min stake age hardfork
+        if ( nBestHeight > (int)HF_BLOCK ) nStakeMinAge = 60 * 60 * 24 * 1; // 1 day min stake age hardfork testnet
         if (block.GetBlockTime() + nStakeMinAge > nTime)
             continue; // only count coins meeting min age requirement
 
@@ -3355,7 +3355,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
                 printf("  getblocks stopping at %d %s\n", pindex->nHeight, pindex->GetBlockHash().ToString().substr(0,20).c_str());
                 // ppcoin: tell downloading node about the latest block if it's
                 // without risk being rejected due to stake connection check
-                if ( nBestHeight > (int)HF_BLOCK ) nStakeMinAge = 60 * 60 * 24 * 4; // 4 day min stake age hardfork
+                if ( nBestHeight > (int)HF_BLOCK ) nStakeMinAge = 60 * 60 * 24 * 1; // 4 day min stake age hardfork
                 if (hashStop != hashBestChain && pindex->GetBlockTime() + nStakeMinAge > pindexBest->GetBlockTime())
                     pfrom->PushInventory(CInv(MSG_BLOCK, hashBestChain));
                 break;
